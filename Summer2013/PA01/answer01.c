@@ -19,15 +19,17 @@
  * See the file "expected/example-output" for the output specification
  */
 
-void partitionAll(int value)
+
+void printPartition(int*part,int length)
 {
-  int * arr;
-  arr = malloc(sizeof(int)*value);
-  partition(arr,0,value);
-  free(arr);
-  return EXIT_SUCCESS;
-  //  printf("partitionAll %d\n", value);
+  int ind;
+  for(ind = 0; ind<length-1;ind++)
+    {
+      printf("%d+",part[ind]);
+    }
+  printf("%d\n",part[length-1]);
 }
+
 
 void partition(int*part,int ind, int left)
 {
@@ -44,15 +46,19 @@ void partition(int*part,int ind, int left)
     }
 }
 
-void printPartition(int*part,int length)
+void partitionAll(int value)
 {
-  int ind;
-  for(ind = 0; ind<length-1;ind++)
-    {
-      printf("%d+",part[ind]);
-    }
-  printf("%d\n",part[length-1]);
+  int * arr;
+  arr = malloc(sizeof(int)*value);
+  partition(arr,0,value);
+  free(arr);
+  return EXIT_SUCCESS;
+  //  printf("partitionAll %d\n", value);
 }
+
+
+
+
 /*
  * =================================================================
  * This function prints the partitions that use increasing values.
