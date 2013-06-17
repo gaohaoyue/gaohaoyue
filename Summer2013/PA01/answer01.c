@@ -52,7 +52,6 @@ void partitionAll(int value)
   arr = malloc(sizeof(int)*value);
   partition(arr,0,value);
   free(arr);
-  return EXIT_SUCCESS;
   //  printf("partitionAll %d\n", value);
 }
 
