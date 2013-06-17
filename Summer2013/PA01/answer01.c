@@ -48,11 +48,12 @@ void partition(int*part,int ind, int left)
 
 void partitionAll(int value)
 {
+  printf("partitionAll %d\n", value);
   int * arr;
   arr = malloc(sizeof(int)*value);
   partition(arr,0,value);
   free(arr);
-  //  printf("partitionAll %d\n", value);
+  
 }
 
 
@@ -78,9 +79,53 @@ void partitionAll(int value)
  * See the file "expected/example-output" for the output specification
  */
 
+
+void printPartition2(int*part,int length)
+{
+  int ind;
+  for(ind = 0; ind<length-1;ind++)
+    {
+      printf("%d+",part[ind]);
+    }
+  printf("%d\n",part[length-1]);
+}
+
+
+void partition2(int*part,int ind, int left)
+{
+  int val; 
+  if(left == 0)
+    {
+      printPartition2(part,ind);
+      return;
+    }
+  for (val = 1; val <= left; val ++)
+    {
+      if (ind == 0)
+	{
+	  part[ind] = val;
+	}
+      else if((val > part[ind-1]) & (ind != 0))
+	{
+	  part[ind] = val;
+	}
+      else
+	{
+	  part[ind] = val+1;
+	  val = val+1;
+	}
+      partition2(part,ind+1,left-val);
+    }
+}
+
 void partitionIncreasing(int value)
 {
-  printf("partitionIncreasing %d\n", value);
+  printf("partitionIncreasing %d\n", value); 
+  int * arr2;
+  arr2 = malloc(sizeof(int)*value);
+  partition2(arr2,0,value);
+  free(arr2);
+ 
 }
 /*
  * =================================================================
