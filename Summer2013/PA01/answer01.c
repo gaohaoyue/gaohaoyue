@@ -93,29 +93,24 @@ void printPartition2(int*part,int length)
 
 void partition2(int*part,int ind, int left)
 {
-  int val; 
+  int val;
   if(left == 0)
     {
       printPartition2(part,ind);
       return;
-    }
-  for (val = 1; val <= left; val ++)
-    {
-      if (ind == 0)
+    }    
+   for (val = 1; val <= left; val ++)
 	{
 	  part[ind] = val;
+	  if(ind == 0)
+	    {
+	      partition2(part,ind+1,left-val); 
+	    }
+	  else if (part[ind] > part[ind -1])
+	    {
+	      partition2(part,ind+1,left-val);
+	    }
 	}
-      else if((val > part[ind-1]) & (ind != 0))
-	{
-	  part[ind] = val;
-	}
-      else
-	{
-	  part[ind] = val+1;
-	  val = val+1;
-	}
-      partition2(part,ind+1,left-val);
-    }
 }
 
 void partitionIncreasing(int value)
@@ -125,8 +120,8 @@ void partitionIncreasing(int value)
   arr2 = malloc(sizeof(int)*value);
   partition2(arr2,0,value);
   free(arr2);
- 
 }
+
 /*
  * =================================================================
  * This function prints the partitions that use unique values.
@@ -147,10 +142,56 @@ void partitionIncreasing(int value)
  * See the file "expected/example-output" for the output specification
  */
 
+
+void printPartition3(int*part,int length)
+{
+  int ind;
+  for(ind = 0; ind<length-1;ind++)
+    {
+      printf("%d+",part[ind]);
+    }
+  printf("%d\n",part[length-1]);
+}
+
+
+void partition3(int*part,int ind, int left)
+{
+  int val; 
+  int i;
+  int y;
+  if(left == 0)
+    {
+      printPartition3(part,ind);
+      return;
+    }
+  for (val = 1; val <= left; val ++)
+    {
+      y=0;
+      part[ind]= val;
+	  for(i=0; i < ind; i++)
+	    {
+	      if((part[ind]- part[i]) ==0)
+		{
+		  y++;
+		}
+	    }
+	  if(y == 0)
+	    {
+	      partition3(part,ind+1,left-val);
+	    }
+    }
+}
+
 void partitionUnique(int value)
 {
   printf("partitionUnique %d\n", value);
+  int * arr3;
+  arr3 = malloc(sizeof(int)*value);
+  partition3(arr3,0,value);
+  free(arr3);
 }
+
+
 
 /*
  * =================================================================
@@ -159,5 +200,6 @@ void partitionUnique(int value)
 void permute(char * charset, int len)
 {
   printf("permute %d\n", len);
+
 }
 
