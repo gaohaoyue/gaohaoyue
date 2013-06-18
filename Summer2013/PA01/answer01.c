@@ -23,11 +23,13 @@
 void printPartition(int*part,int length)
 {
   int ind;
+  printf("=");
   for(ind = 0; ind<length-1;ind++)
     {
-      printf("%d+",part[ind]);
+      
+      printf(" %d +",part[ind]);
     }
-  printf("%d\n",part[length-1]);
+  printf(" %d\n",part[length-1]);
 }
 
 
@@ -83,11 +85,12 @@ void partitionAll(int value)
 void printPartition2(int*part,int length)
 {
   int ind;
+  printf("=");
   for(ind = 0; ind<length-1;ind++)
     {
-      printf("%d+",part[ind]);
+      printf(" %d +",part[ind]);
     }
-  printf("%d\n",part[length-1]);
+  printf(" %d\n",part[length-1]);
 }
 
 
@@ -146,11 +149,12 @@ void partitionIncreasing(int value)
 void printPartition3(int*part,int length)
 {
   int ind;
+  printf("=");
   for(ind = 0; ind<length-1;ind++)
     {
-      printf("%d+",part[ind]);
+      printf(" %d +",part[ind]);
     }
-  printf("%d\n",part[length-1]);
+  printf(" %d\n",part[length-1]);
 }
 
 
