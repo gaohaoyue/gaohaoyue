@@ -197,9 +197,47 @@ void partitionUnique(int value)
  * =================================================================
  * See the file "expected/example-output" for the output specification
  */
+void printPermute(char*charset, int length)
+{
+  int iter;
+  for(iter = 0; iter<length; iter++)
+    {
+      printf("%c ",charset[iter]);
+    }
+  printf("\n");
+}
+void swap(char* c1, char*c2)
+{
+  char t = *c1;
+  *c1 = *c2;
+  *c2 = t;
+}
+
+void recursivePermute(char*charset, int ind, int length)
+{
+  int iter;
+  if(ind == length)
+    {
+      printPermute(charset,length);
+    }
+  for(iter = ind; iter< length; iter++)
+    {
+      swap(& charset[iter], & charset[ind]);
+      recursivePermute(charset, ind+1, length);
+      swap(&charset[iter],&charset[ind]);
+    }
+
+}
+
+void permutation(char*charset,int length)
+{
+  recursivePermute(charset,0,length);
+}
+
+
 void permute(char * charset, int len)
 {
   printf("permute %d\n", len);
-
+  permutation(charset,len);
 }
 
