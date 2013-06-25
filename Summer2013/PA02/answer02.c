@@ -29,7 +29,7 @@
  * sort the integers
  * stored the sorted integers in the file whose name is outName
  */
-
+//add some comment
 void sortInt(char * inName, char * outName)
 {
 }
