@@ -13,6 +13,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void printPartition(int*part,int length);
+void partition(int*part,int ind, int left);
+void printPartition2(int*part,int length);
+void partition2(int*part,int ind, int left);
+void printPartition3(int*part,int length);
+void partition3(int*part,int ind, int left);
+void printPermute(char*charset, int length);
+void recursivePermute(char*charset, int ind, int length);
+void permutation(char*charset,int length);
+
+
 /*
  * =================================================================
  * This function prints all partitions of a positive integer value

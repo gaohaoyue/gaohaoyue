@@ -24,7 +24,7 @@ int main(int argc, char * * argv)
       inName[strlen(inName) - 1] = '\0';
       outName[strlen(outName) - 1] = '\0';
       printf("in=%s, out=%s\n", inName, outName);
-      if (strstr(inName, "str") != NULL)
+	    if (strstr(inName, "str") != NULL)
 	{
 	  sortString(inName, outName);
 	}
@@ -32,7 +32,22 @@ int main(int argc, char * * argv)
 	{
 	  sortInt(inName, outName);
 	}
-    }
+	} 
   fclose(fileList);
   return EXIT_SUCCESS;
 }
+
+
+/*
+int main(int argc, char** argv)
+{
+  const char* inFilename = "inputs/strinput05";
+  const char* outFilename = "sorted.text";
+   sortString(inFilename, outFilename);
+  //  sortInt(inFilename, outFilename);
+  return EXIT_SUCCESS;
+}
+
+*/
+
+
