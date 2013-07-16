@@ -1,48 +1,14 @@
 #include "pa04.h"
 #include <stdio.h>
 #include <stdlib.h>
-/*
-void crashme()
-{
-  char * bad = NULL;
-  *bad = 'a';
-}
-
-void SparseNode_check(SparseNode * array)
-{
-  if(array != NULL) {
-    if(array->value == 0)
-      crashme();
-    SparseNode * left = array->left;
-    SparseNode * right = array->right;
-    if(left != NULL) 
-	if(left->index >= array->index)
-	  crashme();
-    if(right != NULL) 
-	if(right->index <= array->index)
-	  crashme();
-  }
-}
-*/
-/*
-void SparseNode_printInOrder(SparseNode * array)
-{
-  // array is always the same before and after this function.
-  if(array == NULL)
-    return;
-  SparseNode_printInOrder(array->left);
-  printf("[%d] %d\n", array->index, array->value);
-  SparseNode_printInOrder(array->right);
-}
-*/
-
+SparseNode * mergehelper(SparseNode * clone1, SparseNode * array_2);
 
 /* Create a single instance of a sparse array node with a specific
  * index and value. This is a constructor function that allocates
  * memory, copies the integer values, and sets the subtree pointers to
  * NULL.
  */
-SparseNode * mergehelper(SparseNode * clone1, SparseNode * array_2);
+
 SparseNode *SparseNode_create(int index, int value)
 {
   SparseNode * one_node = NULL;
@@ -66,22 +32,42 @@ SparseNode *SparseNode_create(int index, int value)
 
 SparseNode * SparseArray_add ( SparseNode * array, int index, int value )
 {
+  if(value == 0)
+    {
+      return array;
+    }
   if( array == NULL)
     {
       return SparseNode_create(index,value);
     }
-  if(value == (array -> value))
+
+  if(index == (array -> index))
     {
+      array->value = value;
       return array;
       // array->value = value;
     }
-  if( value < (array->value))
+  if( index < (array->index))
     {
-      array -> left = SparseArray_add(array -> left , index, value); 
+      if(array->left == NULL)
+	{
+	  array->left = SparseNode_create(index,value);
+	}
+      else
+	{
+	array -> left = SparseArray_add(array -> left , index, value); 
+	}
     } 
-  if( value > (array -> value))
+  else
     {
-      array -> right = SparseArray_add(array -> right, index, value);
+      if(array->right == NULL)
+	{
+	  array->right = SparseNode_create(index,value);
+	}
+      else
+	{
+	  array -> right = SparseArray_add(array -> right, index, value);
+	}
     }
   
   return array ;
@@ -98,20 +84,14 @@ SparseNode * SparseArray_add ( SparseNode * array, int index, int value )
 SparseNode *SparseArray_build(int * indicies, int * values, int length)
 {
   SparseNode * array = NULL;
-  
-  //if use second way, following two lines should be commented
-  if(length > 0)
-    array = SparseNode_create(indicies[0], values[0]);
-
+  // if(length > 0)
+    //    array = SparseNode_create(indicies[0], values[0]);
   int ind;
-  for (ind=1; ind<length; ind++) //if using second way, ind should be 0 instead of 1
+  for (ind=0; ind<length; ind++) 
     {
-      //      SparseNode* ret = SparseArray_add(array,indicies[ind],values[ind]);
-      // if(array == NULL)
-      //array = ret; //This is the second way of doing it
-      SparseArray_add(array,indicies[ind],values[ind]);
+      array = SparseArray_add(array,indicies[ind],values[ind]);
     }
-   return array;
+  return array;
   /*
  int ind;
   for (ind=0; ind<length; ind++) //if using second way, ind should be 0 instead of 1
@@ -141,15 +121,21 @@ void SparseArray_destroy ( SparseNode * array )
     {
       return;
     }
-  SparseArray_destroy(array -> left);
-  SparseArray_destroy(array -> right);
+  if(array->left!= NULL)
+    {
+      SparseArray_destroy(array -> left);
+    }
+  if(array->right!= NULL)
+    {
+      SparseArray_destroy(array -> right);
+    }
   free(array);
 }
 /* Retrieve the smallest index in the sparse array. 
  */
 int SparseArray_getMin ( SparseNode * array )
 {
-  
+  /* 
   if(array == NULL)
     {
       return 0;
@@ -160,25 +146,26 @@ int SparseArray_getMin ( SparseNode * array )
       array = array->left;
     }
   
-  return array->index;
-  /* if(array != NULL)
+    return array->index;*/
+  if(array != NULL)
     {
       if(array -> left != NULL)
 	{
-	  array -> left = SparseArray_getMin(array -> left) ;
+	  return  SparseArray_getMin(array -> left) ;
 	}
       if(array -> left == NULL)
 	{
 	  return array->index;
 	}
     }
-    return 0;*/
+  return 0;
 }
 
 /* Retrieve the largest index in the sparse array. 
  */
 int SparseArray_getMax ( SparseNode * array )
 {
+  /*
   if(array == NULL)
     {
       return 0;
@@ -191,12 +178,12 @@ int SparseArray_getMax ( SparseNode * array )
   
   return array->index;
 
-  /*
+  */
   if(array != NULL)
     {
       if(array -> right != NULL)
 	{
-	  array -> right = SparseArray_getMax(array -> right) ;
+	  return SparseArray_getMax(array -> right) ;
 	}
       if(array -> right == NULL)
 	{
@@ -204,7 +191,7 @@ int SparseArray_getMax ( SparseNode * array )
 	}
     }
   return 0;
-  */
+
 }
 
 /* Retrieve the node associated with a specific index in a sparse
@@ -215,19 +202,28 @@ int SparseArray_getMax ( SparseNode * array )
  */
 SparseNode * SparseArray_getNode(SparseNode * array, int index )
 {
+  SparseNode*node = array;
       if(array == NULL)
 	{	
 	   return NULL;
 	}
-      if(index == (array -> index))
+      if(index == node->index)
 	{
-	  return array;
+	  return node;
 	}
-      if(index > (array -> index))
+      if(index > (node -> index))
 	{
-	  return SparseArray_getNode(array ->right, index);
+	  return SparseArray_getNode(node ->right, index);
 	}
-      return  SparseArray_getNode(array -> left, index);
+      if(index < (node -> index))
+	{
+	  return  SparseArray_getNode(node -> left, index);
+	}
+      //     else
+      //	{
+      //	  return NULL;
+      //	}
+      return node;
 }
 
 /* Remove a value associated with a particular index from the sparse
@@ -287,6 +283,7 @@ SparseNode * SparseArray_remove ( SparseNode * array, int index )
     }
   array->index = succ->index;
   succ->index = index;
+  array->value = succ->value;
   array->right = SparseArray_remove(array->right,index);
   return array;
   
@@ -360,57 +357,46 @@ SparseNode * SparseArray_copy(SparseNode * array)
 
 SparseNode * SparseArray_merge(SparseNode * array_1, SparseNode * array_2)
 {
-  // SparseNode_check(array_1);
-  // SparseNode_check(array_2);
-  if ((array_1 == NULL) && (array_2 != NULL))
+  if (array_1 == NULL)
     {
       return array_2;
-    }
+    }/*
   if(array_2 == NULL)
     {
       return array_1;
-    }
+      }*/
   SparseNode*clone1 = SparseArray_copy(array_1);
-  //  SparseNode_check(clone1);
   clone1 = mergehelper(clone1,array_2);
-  // SparseNode_check(clone1);
   return clone1;
-  //  return NULL;
 }
 
 SparseNode * mergehelper(SparseNode * clone_root, SparseNode * array_2)
 {
    if(array_2 == NULL)
     {
-      return NULL;
-      }   
-  array_2->left  =  mergehelper(clone_root, array_2->left); 
-  array_2->right =  mergehelper(clone_root, array_2->right); 
-  SparseNode * node1 = SparseArray_getNode(clone_root,array_2->index);
+      return clone_root;
+    }   
+   SparseNode * node2 = array_2;
+   SparseNode * node1 = SparseArray_getNode(clone_root,node2->index);
+
+   
+
+   mergehelper(clone_root, array_2->left); 
+   mergehelper(clone_root, array_2->right); 
+
   if(node1 == NULL)
     {
-      //clone_root = SparseArray_add(clone_root, array_2->index, array_2->value );
-      //node1= SparseArray_add(node1, array_2->index, array_2->value );
-      node1 = SparseNode_create(array_2->index, array_2->value);
-      // return node1;
-      //return clone_root;
+      clone_root= SparseArray_add(clone_root, node2->index, node2->value );
     }
-      //  SparseNode_check(clone_root);
-  if(node1->index == array_2->index)
+  else
     {
-      node1->value += array_2->value;
-      // clone_root->value += array_2->value;
+      node1->value += node2->value;
       if(node1->value == 0)
-	// if(clone_root->value == 0)
 	  {
-	    node1 = SparseArray_remove(node1, node1->index);
-	    // clone_root = SparseArray_remove(clone_root, array_2->index);
+	    clone_root = SparseArray_remove(clone_root, node2->index);
 	  }
-      // return node1;
     }
-
-  //return clone_root;
-  return node1;
+  return clone_root;
 }
 
 

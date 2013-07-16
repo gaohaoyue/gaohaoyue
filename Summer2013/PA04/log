@@ -1,0 +1,83 @@
+commit 5dc0b2436dd32525fb4da12a00e48a4e0f2d8bda
+Author: Haoyue Gao <gao115@ecelinux11.ecn.purdue.edu>
+Date:   Mon Jul 15 20:38:06 2013 -0400
+
+    not successful one
+
+commit f13c9336288097effca1b54de565e420589cc93d
+Author: Haoyue Gao <gao115@ecelinux24.ecn.purdue.edu>
+Date:   Mon Jul 15 10:38:50 2013 -0400
+
+    finish most of the functions
+
+commit fd8e7eaeb673ee66eecd3f1dda853c98a3cfdc74
+Author: Haoyue Gao <gao115@ecelinux14.ecn.purdue.edu>
+Date:   Fri Jul 5 13:36:00 2013 -0400
+
+    Finish the whole program!!!
+
+commit 2c7397f2413ea30b019014ed10133cbbeda43270
+Author: garygao <garygao@ubuntu.(none)>
+Date:   Fri Jul 5 02:28:29 2013 -0400
+
+    Finish the function without degugging
+
+commit 37c18608bebcbdf48fa47c5434449fcf6ce7b6ef
+Author: Haoyue Gao <gao115@ecelinux04.ecn.purdue.edu>
+Date:   Fri Jul 5 00:04:03 2013 -0400
+
+    the convol functions and load file functions
+
+commit f0b6cd92b2baeeeec695666cbb5f7e86b53d5931
+Author: Haoyue Gao <gao115@ecelinux22.ecn.purdue.edu>
+Date:   Mon Jun 24 20:01:33 2013 -0400
+
+    this is for testing
+
+commit a212c78e6b74a3926c20f2a7c256e1504683bd14
+Author: Haoyue Gao <gao115@ecelinux02.ecn.purdue.edu>
+Date:   Tue Jun 18 09:58:29 2013 -0400
+
+    DONE!!!!!
+
+commit 04f8754bcb3cab73ef61002157fe85af4f61f6ff
+Author: Haoyue Gao <gao115@ecelinux02.ecn.purdue.edu>
+Date:   Tue Jun 18 08:54:07 2013 -0400
+
+    the permute function
+
+commit 72a1f3b4a2f45fb8dd372cd58ef0350909454079
+Author: Haoyue Gao <gao115@ecelinux24.ecn.purdue.edu>
+Date:   Mon Jun 17 22:06:20 2013 -0400
+
+    function of increasing and unique
+
+commit 3e863ba3fb6e23047690b3bfa5c5b6a1adfd7183
+Author: Haoyue Gao <gao115@ecelinux02.ecn.purdue.edu>
+Date:   Mon Jun 17 12:10:28 2013 -0400
+
+    add partition increasing function but are not correct right now
+
+commit dff75274c5781b9b56d5c8620d0f05437bb8757c
+Author: Haoyue Gao <gao115@ecelinux02.ecn.purdue.edu>
+Date:   Mon Jun 17 10:31:34 2013 -0400
+
+    remove return in partitionAll
+
+commit 6ac870e62082d55a6ed0cd50fef4b260fe3d448b
+Author: Haoyue Gao <gao115@ecelinux02.ecn.purdue.edu>
+Date:   Mon Jun 17 10:28:10 2013 -0400
+
+    move around the functions, fix the undeclarationg warnin
+
+commit 39026a0067c335f3f64817a6a119b83bc16df4d1
+Author: Haoyue Gao <gao115@ecelinux02.ecn.purdue.edu>
+Date:   Mon Jun 17 10:06:19 2013 -0400
+
+    message
+
+commit 647afe91fe95e1f1c0d93544379f89cfae95643e
+Author: gaohaoyue <gary.gao92@gmail.com>
+Date:   Sun Jun 16 19:42:11 2013 -0700
+
+    Initial commit
