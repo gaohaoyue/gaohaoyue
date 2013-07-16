@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 SparseNode * mergehelper(SparseNode * clone1, SparseNode * array_2);
-
+//finish
 /* Create a single instance of a sparse array node with a specific
  * index and value. This is a constructor function that allocates
  * memory, copies the integer values, and sets the subtree pointers to
