@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "pa05.h"
+
+int checktype(char argv[]);
+void Huff_postOrderPrint(HuffNode *tree,FILE*output);
+
+int main ( int argc, char**argv)
+{
+  if(argc != 2)
+    {
+      printf("usage: ./pa05 <input file> <output file>\n");
+      return EXIT_FAILURE;
+    }
+  FILE*input = fopen(argv[1],"r");
+  if(input == NULL)
+    {
+      printf("Failed to open Input file");
+      return EXIT_FAILURE;
+    }
+ 
+
+  int type = checktype(argv[1]);
+  /********
+  create Huffman Tree*/
+  HuffNode*htree;
+  if(type == 0)
+    {
+      htree = chtree(input,argv[1]);
+    }
+  else
+    {
+      htree = bittree(input,argv[1]);
+    }
+
+
+  /********
+  print the result into output file*/
+  FILE*output = fopen(argv[2],"r");
+  if(output == NULL)
+    {
+      printf("Failed to open Output file");
+      return EXIT_FAILURE;
+    }
+  postOrderprint(htree,output);
+  fclose(input);
+  fclose(output);
+  
+
+  return EXIT_SUCCESS ;
+}
+
+
+int checktype(char argv[1])
+{
+  int way = strstr(argv[1],"bit");
+  if(way != NULL)
+    {
+      // binary file;
+      return 1;
+    }
+  else
+    {
+      // character file;
+      return 0;
+    }
+}

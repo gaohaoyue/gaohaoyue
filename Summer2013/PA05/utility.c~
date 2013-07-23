@@ -1,0 +1,89 @@
+HuffNode*chtree(FILE*input,char*argv[1])
+{
+  Stack*head = 0;
+  HuffNode*temp = NULL;
+  HuffNode*temp2 = NULL;
+  char ch;
+  char ch2;
+  int done =0;
+  
+  while(done == 0)
+    {
+      ch = fgetc(input);
+      if(ch == '1')
+	{
+	  ch2 = fgetc(input);
+	  temp = treenode(ch2);
+	  head = push(head,temp);
+	}
+      else
+	{
+	  temp2 = treenode(0);
+	  temp2 = head -> leafpoint;
+	  head = pop(head);
+	  
+	  if(head == NULL)
+	    {
+	      done = 1;
+	    }
+	  else
+	    {
+	      HuffNode*r = treenode(0);
+	      head = pop(head);
+	      HuffNode*newnode = treenode(0);
+	      newnode -> left = temp2;
+	      newnode -> right = r;
+	      head = push(head,newhead);
+	    }
+	}
+    }
+}
+
+
+
+HuffNode*bittree(FILE*input,char*argv[1])
+{
+
+}
+
+HuffNode*treenode(char value)
+{
+  HuffNode * treenode;
+  treenode = malloc(sizeof(HuffNode));
+  treenode -> left = NULL;
+  treenode -> right = NULL;
+  return treenode;
+}
+
+Stack*stacknode(stack*next,stack*node)
+{
+  Stack*stacknode;
+  stacknode = malloc(sizeof(Stack));
+  stacknode -> next = next;
+  stacknode -> node = node;
+  return stacknode;
+}
+
+Stack*push(Stack*stack, HuffNode*node)
+{
+  Stack*item = malloc(sizeof(Stack));
+  item->node = node;
+  item->next = stack;
+  return item;
+}
+
+Stack*pop(Stack*stack)
+{
+  if(stack == NULL)
+    return NULL;
+  Stack*next = stack->next;
+  free(stack);
+  return next;
+}
+
+int count(Stack*stack)
+{
+  if(stack == NULL)
+    return 0;
+  return 1+ count(stack->next);
+}
